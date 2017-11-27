@@ -95,16 +95,16 @@ function renderLiveTempGraph() {
         element: 'main-graph',
        
         data: [
-            { timestamp: '2008', a: 100},
-            { timestamp: '2007', a: 75 },
-            { timestamp: '2008', a: 50 },
-            { timestamp: '2009', a: 75 },
-            { timestamp: '2010', a: 50 },
-            { timestamp: '2011', a: 75 },
-            { timestamp: '2012', a: 100},
-            { timestamp: '2012', a: 100},
+            { period: '07/07/2017 05:00:00', a: 100},
+            { period: '07/07/2017 05:00:00', a: 75 },
+            { period: '07/07/2017 05:00:00', a: 50 },
+            { period: '07/07/2017 05:00:00', a: 75 },
+            { period: '07/07/2017 05:00:00', a: 50 },
+            { period: '07/07/2017 05:00:00', a: 75 },
+            { period: '07/07/2017 05:00:00', a: 100},
+            { period: '07/07/2017 05:00:00', a: 100},
           ],
-          xkey: 'timestamp',
+          xkey: 'period',
           ykeys: ['a'],
           labels: ['Series A'],
           postUnits: ' A',
@@ -121,13 +121,13 @@ function renderLiveTempGraph() {
 }
 function updateLiveTempGraph(){
   var data = [
-          { timestamp: '2008', a: 0.1},
-            { timestamp: '2007', a: 15 },
-            { timestamp: '2008', a: 10 },
-            { timestamp: '2009', a: 15 },
-            { timestamp: '2010', a: 40 },
-            { timestamp: '2011', a: 65 },
-            { timestamp: '2012', a: 0}
+          { period: '07/07/2017 05:00:00', a: 0.1},
+            { period: '07/07/2017 05:00:00', a: 15 },
+            { period: '07/07/2017 05:00:00', a: 10 },
+            { period: '07/07/2017 05:00:00', a: 15 },
+            { period: '07/07/2017 05:00:00', a: 40 },
+            { period: '07/07/2017 05:00:00', a: 65 },
+            { period: '07/07/2017 05:00:00', a: 0}
   ]
   mainGraph.setData(data);
 }

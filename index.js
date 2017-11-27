@@ -2,9 +2,10 @@ var express = require('express');
 var config = require('./config/index');
 var model = require('./modelos');
 var sequelize = model.sequelize;
+var SensorDados = model['sensor_dados'];
 var app = express();
 app.use(express.static('public'));
-app.use(express.static('vendors'));
+console.log(model);
 
 sequelize.sync({force:true}).then(() => {
     console.log("BANCO SINCRONIZADO");
@@ -12,7 +13,11 @@ sequelize.sync({force:true}).then(() => {
 app.post('/api/dados',gravaDados)
 
 function gravaDados(request,response){
-    console.log(request);
+    return SensorDados.save(request.body).then((sucess) => {
+        return response.status(200).json(sucess)
+    }).catch((error) =>{
+        return response.status(400).send()
+    })
 }
 function getDados(request,response){
 

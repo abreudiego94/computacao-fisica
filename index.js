@@ -13,7 +13,7 @@ sequelize.sync({force:true}).then(() => {
 app.post('/api/dados',gravaDados)
 
 function gravaDados(request,response){
-    return SensorDados.save(request.body).then((sucess) => {
+    return SensorDados.create(request.body).then((sucess) => {
         return response.status(200).json(sucess)
     }).catch((error) =>{
         return response.status(400).send()

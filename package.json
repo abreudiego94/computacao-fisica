@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/abreudiego94/computacao-fisica#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "lodash": "^4.17.4",
+    "moment": "^2.19.3",
     "mysql2": "^1.5.1",
     "sequelize": "^4.22.11"
   }

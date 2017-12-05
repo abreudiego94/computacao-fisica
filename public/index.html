@@ -45,14 +45,14 @@
             <div class="col-md-6 col-sm-6 col-xs-6 tile_stats_count" style="
             text-align: center;">
               <span class="count_top"><i class="fa fa-user"></i> Total Ultilizado</span>
-              <div class="count">2500 kW</div>
+              <div class="count" id="totalUltilizado"> </div>
               
             </div>
             
             <div class="col-md-6 col-sm-6 col-xs-6 tile_stats_count" style="
             text-align: center;">
               <span class="count_top"><i class="fa fa-money"></i> Custo </span>
-              <div class="count">R$ 7,00 </div>
+              <div class="count" id="custo"> </div>
              
             </div>
           </div>
@@ -89,47 +89,44 @@
   </body>
   <script>
 var mainGraph
+var apiUrl = 'http://localhost:3000/api/dados';
 function renderLiveTempGraph() {
- 
-  mainGraph = Morris.Line({
+  $.getJSON(apiUrl,function(results){
+    setTiles(results);
+    mainGraph = Morris.Line({
         element: 'main-graph',
        
-        data: [
-            { period: '07/07/2017 05:00:00', a: 100},
-            { period: '07/07/2017 05:00:00', a: 75 },
-            { period: '07/07/2017 05:00:00', a: 50 },
-            { period: '07/07/2017 05:00:00', a: 75 },
-            { period: '07/07/2017 05:00:00', a: 50 },
-            { period: '07/07/2017 05:00:00', a: 75 },
-            { period: '07/07/2017 05:00:00', a: 100},
-            { period: '07/07/2017 05:00:00', a: 100},
-          ],
-          xkey: 'period',
-          ykeys: ['a'],
+          data: results.dados,
+          xkey: 'createdAt',
+          ykeys: ['valor'],
           labels: ['Series A'],
           postUnits: ' A',
           lineColors: ['#199cef'],
-          goals: [1.0],
           goalLineColors: ['#FF0000'],
           labels: ['Amperes'],
           lineWidth: 3,
           pointSize: 2,
           resize: true
         });
+  })
+  setInterval(function() {
+    updateLiveTempGraph(mainGraph);
+    setTiles(results);
+  }, 5000);
+  
       
-    setInterval(function() { updateLiveTempGraph(mainGraph); }, 1000);
+    
 }
 function updateLiveTempGraph(){
-  var data = [
-          { period: '07/07/2017 05:00:00', a: 0.1},
-            { period: '07/07/2017 05:00:00', a: 15 },
-            { period: '07/07/2017 05:00:00', a: 10 },
-            { period: '07/07/2017 05:00:00', a: 15 },
-            { period: '07/07/2017 05:00:00', a: 40 },
-            { period: '07/07/2017 05:00:00', a: 65 },
-            { period: '07/07/2017 05:00:00', a: 0}
-  ]
-  mainGraph.setData(data);
+  $.getJSON(apiUrl,function(results){
+    mainGraph.setData(results.dados);
+    setTiles(results);
+  });
+  
+}
+function setTiles(dados){
+  $("#custo").text(dados.custo);
+  $("#totalUltilizado").text(dados.total_waltz)
 }
 
 renderLiveTempGraph();
